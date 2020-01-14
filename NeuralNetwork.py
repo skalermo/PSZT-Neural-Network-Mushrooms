@@ -13,16 +13,16 @@ def sigmoidDerivative(x):
 
 # Class definition
 class NeuralNetwork:
-    def __init__(self, x, y, hidden_neurons=8, function=sigmoid, derivative=sigmoidDerivative):
+    def __init__(self, X, Y, hidden_neurons=8, function=sigmoid, derivative=sigmoidDerivative):
         # Layers
         self.input = None
         self.hidden = None
         self.output = None
 
-        output_size = y.shape[1] if len(y.shape) > 1 else 1
+        output_size = Y.shape[1] if len(Y.shape) > 1 else 1
 
         # Weights
-        self.weights1 = np.random.rand(x.shape[1], hidden_neurons)
+        self.weights1 = np.random.rand(X.shape[1], hidden_neurons)
         self.weights2 = np.random.rand(hidden_neurons, output_size)
         
         # Activation function
