@@ -13,8 +13,6 @@ def encodeFile(input, output=None):
     # One hot encode data
     encoded = pd.get_dummies(data)
 
-    print('Number of Columns: {} -> {}'.format(len(data.columns), len(encoded.columns)))
-
     # Save to csv file
     if output is not None:
         encoded.to_csv(output, index=False)
