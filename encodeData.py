@@ -3,7 +3,7 @@ from io import StringIO
 
 
 # Read and encode file
-def encodeFile(input, output):
+def encodeFile(input, output=None):
     # Read file
     data = pd.read_csv(input)
 
@@ -12,8 +12,6 @@ def encodeFile(input, output):
 
     # One hot encode data
     encoded = pd.get_dummies(data)
-
-    print('Number of Columns: {} -> {}'.format(len(data.columns), len(encoded.columns)))
 
     # Save to csv file
     if output is not None:

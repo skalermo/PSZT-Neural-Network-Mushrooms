@@ -25,12 +25,13 @@ Roman Moskalenko
 
 ## Listę wykorzystanych narzędzi i bibliotek
 Język programowania
-- python3
-Wykorzystane biblioteki
-- numpy
-- pandas
+- Python 3
 
-### todo
+Wykorzystane biblioteki
+- [numpy](https://numpy.org/)
+- [pandas](https://pandas.pydata.org/)
+
+### Todo
 Instrukcję pozwalającą na odtworzenie uzyskanych wyników.
 Cele i tezy przeprowadzonych badań, np. celem tego eksperymentu jest zbadanie wpływu zmiany rozmiaru populacji na wynik optymalizacji. Zakładamy, że wraz ze zwiększeniem rozmiaru populacji rosła będzie jakość uzyskanych wyników.
 Wyniki eksperymentów w postaci czytelnych tabel i/lub wykresów.
