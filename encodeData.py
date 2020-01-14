@@ -3,7 +3,7 @@ from io import StringIO
 
 
 # Read and encode file
-def encodeFile(input, output):
+def encodeFile(input, output=None):
     # Read file
     data = pd.read_csv(input)
 
