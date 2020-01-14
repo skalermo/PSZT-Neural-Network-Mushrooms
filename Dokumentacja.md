@@ -14,7 +14,10 @@ Rafal Babinski
 Roman Moskalenko
 
 ## Zestawienie ważnych decyzji projektowych
-- Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstowy. 
+**Decyzje wstępne**
+- Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstowy
+- Jako szablon wstępny wybraliśmy sieć neuronową opisaną w [tym artykule](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6).
+- Przekodowaliśmy podany zbiór danych na *kod 1 z n* dla zapewnienia działania sieci. 
 
 ## Listę wykorzystanych narzędzi i bibliotek
 Język programowania
