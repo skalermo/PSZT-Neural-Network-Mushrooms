@@ -12,8 +12,11 @@ def encodeFile(input, output):
 
     print('Number of Columns: {} -> {}'.format(len(data.columns), len(encoded.columns)))
 
-    # Save to csv file
-    encoded.to_csv(output, index=False)
+    if output is not None:
+        # Save to csv file
+        encoded.to_csv(output, index=False)
+
+    return encoded
 
 
 # Read and encode line
