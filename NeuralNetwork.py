@@ -13,30 +13,28 @@ def sigmoidDerivative(x):
 
 # Class definition
 class NeuralNetwork:
-    def __init__(self, X, Y, hidden_neurons=8, function=sigmoid, derivative=sigmoidDerivative):
+    def __init__(self, input_size, output_size, hidden_neurons=8, function=sigmoid, derivative=sigmoidDerivative):
         # Layers
         self.input = None
         self.hidden = None
         self.output = None
 
-        output_size = Y.shape[1] if len(Y.shape) > 1 else 1
-
         # Weights
-        self.weights1 = np.random.rand(X.shape[1], hidden_neurons)
-        self.weights2 = np.random.rand(hidden_neurons, output_size)
+        self.weights1 = np.random.rand(hidden_neurons, input_size)
+        self.weights2 = np.random.rand(output_size, hidden_neurons)
         
         # Activation function
         self.activation = function
         self.derivative = derivative
 
     def feedforward(self):
-        self.hidden = self.activation(np.dot(self.input, self.weights1))
-        self.output = self.activation(np.dot(self.hidden, self.weights2))
+        self.hidden = self.activation(np.dot(self.weights1, self.input))
+        self.output = self.activation(np.dot(self.weights2, self.hidden))
 
     def backprop(self, y):
-        d_weights2 = np.dot(self.hidden.T, 2 * (y - self.output) * self.derivative(self.output))
-        d_weights1 = np.dot(self.input.T, np.dot(2 * (y - self.output) * self.derivative(self.output),
-                                                 self.weights2.T) * self.derivative(self.hidden))
+        d_weights2 = np.dot(2 * (y - self.output) * self.derivative(self.output), self.hidden.T)
+        d_weights1 = np.dot(np.dot(self.weights2.T, 2 * (y - self.output) * self.derivative(self.output))
+                            * self.derivative(self.hidden), self.input.T)
 
         self.weights1 += d_weights1
         self.weights2 += d_weights2
