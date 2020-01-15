@@ -17,9 +17,11 @@ Roman Moskalenko
 **Decyzje wstępne**
 - Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstowy
 - Jako szablon wstępny wybraliśmy sieć neuronową opisaną w [tym artykule](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6).
+- Uczenie sieci będzie przeprowadzać się z nadzorem.
 - Przekodowaliśmy podany zbiór danych na *kod 1 z n* dla zapewnienia działania sieci.
 - Arbitralnie wybraliśmy liczbę neuronów w warstwie ukrytej - 8.
 - Arbitralnie wybraliśmy funkcję aktywacji - sigmoid.
+- Inicjalizacja wag każdego nejronu odbywa się losowo.
 - Stworzyliśmy zbiór danych kontrolnych, 100 wybranych losowo próbek z podanego
  zbioru. Na nim będziemy testować efektywność sieci.
 
