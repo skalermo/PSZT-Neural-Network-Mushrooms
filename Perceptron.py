@@ -12,7 +12,7 @@ def sigmoidDerivative(x):
 
 
 # Class definition
-class NeuralNetwork:
+class Perceptron:
     def __init__(self, input_size, output_size, hidden_neurons=8, function=sigmoid, derivative=sigmoidDerivative):
         # Layers
         self.input = None

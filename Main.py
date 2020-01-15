@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from NeuralNetwork import NeuralNetwork
+from Perceptron import Perceptron
 
 if __name__ == '__main__':
     # Read file
@@ -16,12 +16,14 @@ if __name__ == '__main__':
     # Create NN
     input_size = X.shape[1]
     output_size = Y.shape[1] if len(Y.shape) > 1 else 1
-    nn = NeuralNetwork(input_size, output_size)
+    nn = Perceptron(input_size, output_size)
 
     # Convert to np arrays
     x = X.to_numpy(float)
-    x.shape += (1,)
     y = Y.to_numpy(float)
+
+    # Add one more dimension to input array
+    x.shape += (1,)
 
     for i in range(len(y)):
         if i % 100:
