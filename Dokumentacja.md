@@ -34,7 +34,7 @@ Roman Moskalenko
 
 ![first_chart](charts/first_chart.png)
 
-- Przez pierwsze 25 iteracji możemy zaobserwować dużą strate na zbiorze walidacyjnym (czerwona linia).
+- Przez pierwsze 30 iteracji możemy zaobserwować dużą strate na zbiorze walidacyjnym (czerwona linia).
 - Po czym następuje zerowa strata, z czego można wywnioskować że sieć dopasowała się do danych (przeuczenie sieci).
 
 ## Listę wykorzystanych narzędzi i bibliotek
