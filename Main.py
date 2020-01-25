@@ -56,8 +56,7 @@ if __name__ == '__main__':
             loss_sum += np.square(y[j] - nn.test(x[j]))
         test_loss.append(loss_sum / float(len(testy)))
 
-    Chart.addToChart(train_loss)
-    Chart.addToChart(test_loss)
+    Chart.makeTwoPlots(train_loss, test_loss)
     Chart.show()
 
 

@@ -9,22 +9,20 @@ ax.set_xlabel('Iteration')
 
 class Chart:
     @staticmethod
-    def addToChart( data):
-        ax.plot(data)
-
-    @staticmethod
-    def addLegend():
-        pass
+    def makeTwoPlots(data1, data2):
+        ax.plot(data1, 'blue', label='Training set loss')
+        ax.plot(data2, 'red', label='Test set loss')
+        ax.legend(loc='upper right')
 
     @staticmethod
     def show():
         plt.show()
 
     @staticmethod
-    def save(size=(20, 10)):
+    def save(size=(640, 480), dpi=72):
+        size = [x/dpi for x in size]
         fig.set_size_inches(size, forward=True)
-        fig.set_dpi(72)
-        fig.savefig('chart.png', dpi=72)
+        fig.savefig('chart.png', dpi=dpi)
 
 # # draw a tick corresponding to the firstGoodGeneration above the chart
 # generationTick = [firstGoodGeneration]
