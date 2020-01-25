@@ -22,7 +22,8 @@ class Perceptron:
         # Weights
         self.weights1 = np.random.rand(hidden_neurons, input_size)
         self.weights2 = np.random.rand(output_size, hidden_neurons)
-        
+        # self.weights2 = np.zeros(shape=(output_size, hidden_neurons))
+
         # Activation function
         self.activation = function
         self.derivative = derivative
@@ -30,6 +31,7 @@ class Perceptron:
     def feedforward(self):
         self.hidden = self.activation(np.dot(self.weights1, self.input))
         self.output = self.activation(np.dot(self.weights2, self.hidden))
+        # self.output = np.dot(self.weights2, self.hidden))
 
     def backprop(self, y):
         d_weights2 = np.dot(2 * (y - self.output) * self.derivative(self.output), self.hidden.T)
@@ -43,3 +45,11 @@ class Perceptron:
         self.input = x
         self.feedforward()
         self.backprop(y)
+
+    def test(self, x):
+        self.input = x
+        self.feedforward()
+        self.getOutput()
+
+    def getOutput(self):
+        return self.output.reshape(self.output.shape[0])
