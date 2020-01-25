@@ -17,14 +17,17 @@ class KFold:
         # Create index list
         idx = list(range(len(data)))
 
+        # Chunk size
+        chunk_size = len(data) // self.k
+
         # Shuffle arrays
         if self.shuffle:
             self.rand.shuffle(idx)
 
-        # Split into chunks (train = data - test), len(test) = k
-        for i in range(0, len(idx), self.k):
-            test = idx[i:i + self.k]
-            train = idx[0:i] + idx[i + self.k:]
+        # Split into chunks (train = data - test), len(test) = chunk_size
+        for i in range(0, len(idx), chunk_size):
+            test = idx[i:i + chunk_size]
+            train = idx[0:i] + idx[i + chunk_size:]
             yield train, test
 
 
