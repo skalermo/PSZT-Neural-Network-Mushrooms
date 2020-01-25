@@ -20,6 +20,12 @@ class Chart:
     def show():
         plt.show()
 
+    @staticmethod
+    def save(size=(20, 10)):
+        fig.set_size_inches(size, forward=True)
+        fig.set_dpi(72)
+        fig.savefig('chart.png', dpi=72)
+
 # # draw a tick corresponding to the firstGoodGeneration above the chart
 # generationTick = [firstGoodGeneration]
 # ax.xaxis.set_minor_locator(ticker.FixedLocator(generationTick))
