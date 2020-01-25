@@ -24,13 +24,17 @@ class Perceptron:
         self.weights2 = np.random.rand(output_size, hidden_neurons)
         # self.weights2 = np.zeros(shape=(output_size, hidden_neurons))
 
+        # Biases
+        self.hidden_biases = np.zeros(shape=(hidden_neurons, 1))
+        self.output_biases = np.zeros(shape=(output_size, 1))
+
         # Activation function
         self.activation = function
         self.derivative = derivative
 
     def feedforward(self):
-        self.hidden = self.activation(np.dot(self.weights1, self.input))
-        self.output = self.activation(np.dot(self.weights2, self.hidden))
+        self.hidden = self.activation(np.dot(self.weights1, self.input) + self.hidden_biases)
+        self.output = self.activation(np.dot(self.weights2, self.hidden) + self.output_biases)
         # self.output = np.dot(self.weights2, self.hidden))
 
     def backprop(self, y):
@@ -49,7 +53,7 @@ class Perceptron:
     def test(self, x):
         self.input = x
         self.feedforward()
-        self.getOutput()
+        return self.getOutput()
 
     def getOutput(self):
         return self.output.reshape(self.output.shape[0])
