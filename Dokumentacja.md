@@ -13,17 +13,29 @@ Mamy pełną swobodę w zaimplementowaniu sieci neuronowej. Wykorzystując podan
 Rafal Babinski
 Roman Moskalenko
 
-## Zestawienie ważnych decyzji projektowych
+## Decyzje projektowe i przeprowadzone badania
 **Decyzje wstępne**
 - Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstowy
 - Jako szablon wstępny wybraliśmy sieć neuronową opisaną w [tym artykule](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6).
 - Uczenie sieci będzie przeprowadzać się z nadzorem.
 - Przekodowaliśmy podany zbiór danych na *kod 1 z n* dla zapewnienia działania sieci.
-- Arbitralnie wybraliśmy liczbę neuronów w warstwie ukrytej - 8.
+- Arbitralnie wybraliśmy liczbę neuronów w warstwie ukrytej - 2.
 - Arbitralnie wybraliśmy funkcję aktywacji - sigmoid.
 - Inicjalizacja wag każdego nejronu odbywa się losowo.
+- Wartości parametrów bias jest zerowa.
 - Stworzyliśmy zbiór danych kontrolnych, 100 wybranych losowo próbek z podanego
  zbioru. Na nim będziemy testować efektywność sieci.
+ 
+**Badanie wstępne**
+
+- Uruchomiono po raz pierszy sieć neuronową. 
+- Przez 100 iteracji sieć uczyła się na całym zbiorze danych.
+- Przetestowano na losowo wybranych 100 próbkach.
+
+![first_chart](charts/first_chart.png)
+
+- Przez pierwsze 25 iteracji możemy zaobserwować dużą strate na zbiorze walidacyjnym (czerwona linia).
+- Po czym następuje zerowa strata, z czego można wywnioskować że sieć dopasowała się do danych (przeuczenie sieci).
 
 ## Listę wykorzystanych narzędzi i bibliotek
 Język programowania
@@ -32,6 +44,8 @@ Język programowania
 Wykorzystane biblioteki
 - [numpy](https://numpy.org/)
 - [pandas](https://pandas.pydata.org/)
+
+
 
 ### Todo
 Instrukcję pozwalającą na odtworzenie uzyskanych wyników.
