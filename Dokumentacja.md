@@ -15,6 +15,7 @@ Roman Moskalenko
 
 ## Decyzje projektowe i przeprowadzone badania
 **Decyzje wstępne**
+
 - Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstowy
 - Jako szablon wstępny wybraliśmy sieć neuronową opisaną w [tym artykule](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6).
 - Uczenie sieci będzie przeprowadzać się z nadzorem.
@@ -48,6 +49,7 @@ na tym zbiorze sprawdzamy efektywność działania sieci.
 - Już na 13 iteracji strata na zbiorze testowym osiągnęła 0.002 i utrzymywała się taka w przeciągu pozostałych iteracji.
 
 **Zależność straty od liczby neuronów i podziału danych**
+
 Badamy jak zmienia się strata na zbiorze testowym w zależności od liczby neuronów i stosunku liczności zbioru
 treningowego do liczności zbioru testowego.
 
@@ -86,6 +88,7 @@ Widać, że liczba iteracji ma duże znaczenie. Większość wariacji perceptron
 Jednak ciężko przewidzieć w którym momencie nastąpi zmniejszenie straty i czy w ogóle nastąpi.
 
 **Modyfikacja perceptronu**
+
 Ponieważ nasz perceptron jest implementacją bazowaną na przykładzie z artykułu powyżej, może zawierać wady, z powodu
 możliwych uproszczeń przyjętych w artykule.
 
@@ -151,6 +154,7 @@ Porównanie współczynników uczenia 0.07, 0.1 oraz 0.3
 - postanowiliśmy w dalszych eksperymentach używać wartości 0.1
 
 **K-krotna walidacja krzyżowa**
+
 Dla ulepszenia jakości uczenia i oceniania sieci wprowadzamy metodę k-krotnej walidacji krzyżowej. 
 Rysunek poniżej ilustruje w jaki sposób dzielone są dane wejściowe.
 
