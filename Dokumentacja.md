@@ -32,7 +32,7 @@ Roman Moskalenko
 - Przez 100 iteracji sieć uczyła się na całym zbiorze danych.
 - Przetestowano na losowo wybranych 100 próbkach.
 
-![first_chart](charts/first_chart.png)
+![first_chart](charts/double_activation/first_chart.png)
 
 - Przez pierwsze 30 iteracji możemy zaobserwować dużą strate na zbiorze walidacyjnym (czerwona linia).
 - Po czym następuje prawie zerowa strata. Mamy podejrzenie, że sieć dopasowała się do danych (przeuczenie sieci).
@@ -43,18 +43,17 @@ Aby zapobiec przeuczeniu sieci dzielimy dane na dwa zbiory: zbiór treningowy - 
 na tym zbiorze sprawdzamy efektywność działania sieci.
 - Podział danych na treningowe i testowe w stosunku 1:1
 
-![second_chart](charts/simple_validation_2neurons.png)
+![second_chart](charts/double_activation/simple_validation_2neurons.png)
 
 - Już na 13 iteracji strata na zbiorze testowym osiągnęła 0.002 (później się okazało to jest duża strata) i utrzymywała się taka w przeciągu pozostałych iteracji.
 
 **Zależność straty od liczby neuronów i podziału danych**
-
 Badamy jak zmienia się strata na zbiorze testowym w zależności od liczby neuronów i stosunku liczności zbioru
 treningowego do liczności zbioru testowego.
 
 Straty po 100 iteracjach uczenia
 
-![heattable](charts/neuron_partition_heattable.png)
+![heattable](charts/double_activation/neuron_partition_heattable.png)
 
 <!--
 | | 1:16 | 1:8 | 1:4 | 1:2 | 1:1 | 2:1 | 4:1 | 8:1 |
@@ -80,11 +79,76 @@ Wykresy teraz mają skalę logarytmiczną.
 
 |||
 |---|---|
-|![doubleactiv_100iter](charts/doubleactiv_100iter.png)|![doubleactiv_100iter2](charts/doubleactiv_100iter2.png)|
-|![doubleactiv_400iter](charts/doubleactiv_400iter.png)|![doubleactiv_400iter2](charts/doubleactiv_400iter2.png)|
+|![doubleactiv_100iter](charts/double_activation/doubleactiv_100iter.png)|![doubleactiv_100iter2](charts/double_activation/doubleactiv_100iter2.png)|
+|![doubleactiv_400iter](charts/double_activation/doubleactiv_400iter.png)|![doubleactiv_400iter2](charts/double_activation/doubleactiv_400iter2.png)|
 
 Widać, że liczba iteracji ma duże znaczenie. Większość wariacji perceptronu zmniejsza stratę dopiero po 100 iteracjach.
 Jednak ciężko przewidzieć w którym momencie nastąpi zmniejszenie straty i czy w ogóle nastąpi.
+
+**Modyfikacja perceptronu**
+Ponieważ nasz perceptron jest implementacją bazowaną na przykładzie z artykułu powyżej, może zawierać wady, z powodu
+możliwych uproszczeń przyjętych w artykule.
+
+Z tego powodu następujące zmiany powinne zbliżyć naszą implementacje do modelu przedstawionego na wykładzie:
+- neuron warstwy wyjściowej jest liniowy (nie obliczamy funkcji aktywacji dla niego). 
+- odpowiednie zmiany propagacji wstecznej
+
+
+![noactiv100iter_lr1](charts/no_output_activation/noactiv100iter_lr1.png)
+
+- Strata prawię się nie zmienia dla wszystkich wariacji perceprtonu i wynosi w przybliżeniu 0.4729.
+- W czasie działania programu dostaliśmy warning o nadmiarze zauważonym przy obliczaniu funkji aktywacji:
+(RuntimeWarning: overflow encountered in exp:
+  return 1 / (1 + np.exp(-x)))
+  
+Okazuje się, że po usunięciu funkcji aktywacji (i jej pochodnej w propagacji wstecznej) pochodna
+po wagach staje się zbyt duża, co skutkuje tym, że wartości bezwzględne wag stają się zbyt duże
+i powodują powstanie nadmiaru przy obliczaniu funkcji aktywacji.
+
+Chcemy mieć kontrolę nad tym jak szybko zmieniają się wagi. Wprowadzamy tzw współczynnik uczenia.
+Teraz pochodne straty zanim dodać do wag przemnażamy przez ten parametr. Dla początku przyjeliśmy
+współczynnik uczenia równy 0.1.
+
+|||
+|---|---|
+|![noactiv100iter_lr01randw](charts/no_output_activation/noactiv100iter_lr01_randw.png)|![noactiv100iter_lr01randw2](charts/no_output_activation/noactiv100iter_lr01_randw2.png)|
+|![noactiv100iter_lr01randw3](charts/no_output_activation/noactiv100iter_lr01_randw3.png)||
+
+- obserujemy wyraźne poprawienie sprawności
+- zauważalny jest wpływ losowości początkowych wag
+
+**Inicjowanie wag**
+
+Wolimy zmniejszyć do minimum negatywny wpływ losowości wag.
+- inicjujemy wagi neuronu wyjściowego zerami zamiast robić to losowo
+- wagi neuronów ukrytych losujemy z rozkładu jednostajnego z przedziału (-1/sqrt(n), 1/sqrt(n)), 
+gdzie n - wymiar wymiar wejścia neuronu
+
+|||
+|---|---|
+|![noactiv400iter_lr01_custw](charts/no_output_activation/noactiv400iter_lr01_custw.png)|![noactiv400iter_lr01_custw2](charts/no_output_activation/noactiv400iter_lr01_custw2.png)|
+
+- bardzo dobry rezultat. Perceptron odrazu zaczyna poprawiać stratę dla wszystkich badanych wariacji
+- perceptron z 1 i 2 neuronami uczy się wolno w porównaniu z innymi
+- perceptron z 16 neuronami już nie poprawia wyniku w porównaniu z 4 czy 8 neuronami
+
+**Zależność sprawności perceptronu od współczynnika uczenia**
+
+Porównamy jak zachowuje się strata dla perceptronu z 4 neuronami dla różnych współczynników uczenia
+
+![4neurons](charts/learning_rates/4neurons.png)
+
+- zbyt mały współczynnik uczenia powoduje, że sieć uczy się zbyt wolno
+- zbyt duży współczynnik skutkuje zbyt częstymi błędami sieci, a więc dużą stratą
+
+Porównanie współczynników uczenia 0.07, 0.1 oraz 0.3
+
+| 4 neurony | 8 neuronów |
+|---|---|
+| ![4neurons2](charts/learning_rates/4neurons2.png) | ![8neurons](charts/learning_rates/8neurons.png) |
+
+- wskaźniki jakości pokazują porównywalny rezultat
+- postanowiliśmy w dalszych eksperymentach używać wartości 0.1
 
 ## Listę wykorzystanych narzędzi i bibliotek
 Język programowania
@@ -93,7 +157,7 @@ Język programowania
 Wykorzystane biblioteki
 - [numpy](https://numpy.org/)
 - [pandas](https://pandas.pydata.org/)
-
+- [seaborn](https://seaborn.pydata.org/)
 
 
 ### Todo
