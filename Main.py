@@ -30,7 +30,6 @@ if __name__ == '__main__':
 
     input, output = readData('dataset.csv')
     # Create NN
-    p = Perceptron(input.shape[1], output.shape[1], hidden_neurons=16)
 
     k = 5
 
@@ -42,33 +41,35 @@ if __name__ == '__main__':
     test_input = input[test_idx]
     test_output = output[test_idx]
 
-    train_loss = []
-    test_loss = []
+    for n in [1, 2, 4, 8, 16]:
+        p = Perceptron(input.shape[1], output.shape[1], hidden_neurons=n)
+        train_loss = []
+        test_loss = []
 
-    for j in range(100):
-        loss_sum = 0.0
-        for i in range(len(train_output)):
-            # if i == len(train_output)-1:
-            #     print("for iteration # " + str(i) + "\n")
-            #     print("Actual Output: \n" + str(train_output[i]))
-            #     print("Predicted Output: \n" + str(p.getOutput()))
-            #     print("Loss: \n" + str((np.square(train_output[i] - p.getOutput()))))  # mean sum squared loss
-            #     print("\n")
+        for j in range(2):
+            loss_sum = 0.0
+            for i in range(len(train_output)):
+                # if i == len(train_output)-1:
+                #     print("for iteration # " + str(i) + "\n")
+                #     print("Actual Output: \n" + str(train_output[i]))
+                #     print("Predicted Output: \n" + str(p.getOutput()))
+                #     print("Loss: \n" + str((np.square(train_output[i] - p.getOutput()))))  # mean sum squared loss
+                #     print("\n")
 
-            p.train(train_input[i], train_output[i])
-            loss_sum += np.square(train_output[i] - p.getOutput())
-        train_loss.append(loss_sum / float(len(train_output)))
+                p.train(train_input[i], train_output[i])
+                loss_sum += np.square(train_output[i] - p.getOutput())
+            train_loss.append(loss_sum / float(len(train_output)))
 
-        # calculate loss on test data
-        loss_sum = 0.0
-        for i in range(len(test_output)):
-            loss_sum += np.square(test_output[i] - p.test(test_input[i]))
-        avg_loss = loss_sum / float(len(test_output))
-        test_loss.append(avg_loss)
-
-        print(j, avg_loss)
-
-    Chart.makeTwoPlots(train_loss, test_loss)
+            # calculate loss on test data
+            loss_sum = 0.0
+            for i in range(len(test_output)):
+                loss_sum += np.square(test_output[i] - p.test(test_input[i]))
+            avg_loss = loss_sum / float(len(test_output))
+            test_loss.append(avg_loss)
+            print(n, j, avg_loss)
+        Chart.addToPlot(test_loss, str(n) + ' neurons')
+        # Chart.addToPlot(test_loss)
+        # Chart.plotTrainingTestLosses(train_loss, test_loss)
     Chart.show()
 
 

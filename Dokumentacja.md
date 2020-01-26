@@ -35,7 +35,7 @@ Roman Moskalenko
 ![first_chart](charts/first_chart.png)
 
 - Przez pierwsze 30 iteracji możemy zaobserwować dużą strate na zbiorze walidacyjnym (czerwona linia).
-- Po czym następuje zerowa strata, z czego można wywnioskować że sieć dopasowała się do danych (przeuczenie sieci).
+- Po czym następuje prawie zerowa strata. Mamy podejrzenie, że sieć dopasowała się do danych (przeuczenie sieci).
 
 **Podział zbioru danych na treningowy i testowy**
 
@@ -45,7 +45,7 @@ na tym zbiorze sprawdzamy efektywność działania sieci.
 
 ![second_chart](charts/simple_validation_2neurons.png)
 
-- Już na 13 iteracji strata na zbiorze testowym osiągnęła 0.002 i utrzymywała się taka w przeciągu pozostałych iteracji.
+- Już na 13 iteracji strata na zbiorze testowym osiągnęła 0.002 (później się okazało to jest duża strata) i utrzymywała się taka w przeciągu pozostałych iteracji.
 
 **Zależność straty od liczby neuronów i podziału danych**
 Badamy jak zmienia się strata na zbiorze testowym w zależności od liczby neuronów i stosunku liczności zbioru
@@ -55,22 +55,35 @@ Straty po 100 iteracjach uczenia
 
 ![heattable](charts/neuron_partition_heattable.png)
 
-Ciekawy wnioski z tabeli:
-- perceptron z 2 neuronami pokazał najlepsze wyniki spośród wszystkich badanych modyfikacji
-- możliwe, że wieleneuronowe perceptrony potrzebują więcej iteracji żeby móc nauczyć się
-- perceptron może nauczyć się nawet gdy dane treningowe stanowią połowę lub mniej od całego zbioru
-lecz wtedy rośnie strata
-
 <!--
-| | 1:16 | 1:8 | 1:4 | 1:2 | 1:1 | 2:1 | 4:1 |
-|---|---|---|---|---|---|---|---|
-| 1 | 0.24996987 | 0.24978884 | 0.1209201 | 0.12247378 | 0.12065256 | 0.13313197 | 0.11916315 |
-| 2 | 0.28698771 | 0.25095842 | 0.00954373 | 0.00207549 | 0.00966817 | 3.7384e-04 | 2.80576709e-06 |
-| 4 | 0.31201701 | 0.01095525 | 0.0011118 | 0.00996514 | 0.00171979 | 0.00184599 | 0.01205114 |
-| 8 | 0.01169527 | 0.01048587 | 0.01101799 | 0.01104446 | 0.01088784 | 0.01299843 | 0.01327238 |
-| 16| 0.45859595 | 0.00970373 | 0.00958819 | 0.00980373 | 0.00883177 | 0.00074566 | 0.00968324 |
+| | 1:16 | 1:8 | 1:4 | 1:2 | 1:1 | 2:1 | 4:1 | 8:1 |
+|---|---|---|---|---|---|---|---|---|
+| 1 | 0.24996987 | 0.24978884 | 0.1209201 | 0.12247378 | 0.12065256 | 0.13313197 | 0.11916315 | 0.12001857 |
+| 2 | 0.28698771 | 0.25095842 | 0.00954373 | 0.00207549 | 0.00966817 | 3.7384e-04 | 2.80576709e-06 | 2.42590592e-06 |
+| 4 | 0.31201701 | 0.01095525 | 0.0011118 | 0.00996514 | 0.00171979 | 0.00184599 | 0.00061646 | 1.6865149e-06 |
+| 8 | 0.01169527 | 0.01048587 | 0.01101799 | 0.01104446 | 0.01088784 | 0.01299843 | 0.01327238 | 0.00110838 |
+| 16| 0.45859595 | 0.00970373 | 0.00958819 | 0.00980373 | 0.00883177 | 0.00074566 | 0.00968324 | 0.00110679 |
 -->
+Wnioski z tabeli:
+- perceptron z 1 neuronem przy żadnym z podziałów nie pokazał dobrych wyników.
+- perceptron z 2 oraz 4 neuronami spradził się nieco lepiej niż perceptrony z 8 i 16.
+- perceptron może nauczyć się nawet gdy dane treningowe stanowią połowę lub mniej od całego zbioru
+lecz wtedy strata jest porównywalnie duża.
+- możliwe, że 100 iteracji to jednak zbyt mało by nauczyć perceptron.
 
+**Porównanie strat dla większej liczby iteracji dla różnej liczby neuronów**
+
+Jeszcze dwa razy uruchomiliśmy sieć dla 100 i 400 iteracji dla podziału danych 4:1.
+
+Wykresy teraz mają skalę logarytmiczną.
+
+|||
+|---|---|
+|![doubleactiv_100iter](charts/doubleactiv_100iter.png)|![doubleactiv_100iter2](charts/doubleactiv_100iter2.png)|
+|![doubleactiv_400iter](charts/doubleactiv_400iter.png)|![doubleactiv_400iter2](charts/doubleactiv_400iter2.png)|
+
+Widać, że liczba iteracji ma duże znaczenie. Większość wariacji perceptronu zmniejsza stratę dopiero po 100 iteracjach.
+Jednak ciężko przewidzieć w którym momencie nastąpi zmniejszenie straty i czy w ogóle nastąpi.
 
 ## Listę wykorzystanych narzędzi i bibliotek
 Język programowania

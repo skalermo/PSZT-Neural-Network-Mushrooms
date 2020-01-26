@@ -10,13 +10,19 @@ ax.set_xlabel('Iteration')
 
 class Chart:
     @staticmethod
-    def makeTwoPlots(data1, data2):
+    def plotTrainingTestLosses(data1, data2):
         ax.plot(data1, 'blue', label='Training set loss', picker=0.01)
         ax.plot(data2, 'red', label='Test set loss', picker=0.01)
         max_value = max(data1[0])
         ax.set_yticks(list(np.arange(0, max_value, 0.01)), minor=True)
         ax.set_xticks(list(range(0, len(data1), 10)), minor=True)
         ax.legend(loc='upper right')
+
+    @staticmethod
+    def addToPlot(data, label=''):
+        ax.plot(data, label=label, picker=0.01)
+        ax.legend()
+        plt.yscale("log")
 
     @staticmethod
     def show():
