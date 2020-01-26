@@ -18,7 +18,7 @@ class KFold:
         idx = list(range(len(data)))
 
         # Chunk size
-        chunk_size = len(data) // self.k
+        chunk_size = int(len(data) / self.k)
 
         # Shuffle arrays
         if self.shuffle:
