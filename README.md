@@ -1,6 +1,7 @@
 # PSZT-Neural-Network
 ## Instrukcja
 Możliwe ustawienia programu:
+ - `-d` Plik z zestawem danych
  - `-h` Wyświetl możliwe ustawienia programu
  - `-n` Liczbę neuronów warstwy ukrytej
  - `-i` Liczba iteracji

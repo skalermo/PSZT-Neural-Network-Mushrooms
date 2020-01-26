@@ -4,6 +4,8 @@ from time import time
 
 def parseArgs():
     parser = ArgumentParser(prog='Main.py', description='Neural network')
+
+    parser.add_argument('-d', type=str, default='dataset.csv', metavar='', help='DataSet filename')
     parser.add_argument('-n', type=int, default=4, metavar='', help='Number of neurons in hidden layer')
     parser.add_argument('-i', type=int, default=100, metavar='', help='Number of iterations')
     parser.add_argument('-l', type=float, default=0.1, metavar='', help='Learning rate')

@@ -37,7 +37,7 @@ def calcLoss(input, output):
 
 if __name__ == '__main__':
     args = Parser.parseArgs()
-    input, output = readData('dataset.csv')
+    input, output = readData(args['d'])
 
     # Create Perceptron
     p = Perceptron(input.shape[1], output.shape[1], hidden_neurons=args['n'], learning_rate=args['l'])
