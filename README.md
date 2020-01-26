@@ -14,4 +14,4 @@ Możliwe ustawienia programu:
  
  Użycie programu:
  
-        python -m Main [-h] [-n] [-i] [-l] [-r] [-k] [-s] [-c] [-v]
+        python -m Main [-h] [-d] [-n] [-i] [-l] [-r] [-k] [-s] [-c] [-v]
