@@ -13,16 +13,18 @@ def sigmoidDerivative(x):
 
 # Class definition
 class Perceptron:
-    def __init__(self, input_size, output_size, hidden_neurons=8, function=sigmoid, derivative=sigmoidDerivative):
+    def __init__(self, input_size, output_size, hidden_neurons=8, learning_rate=0.1, function=sigmoid, derivative=sigmoidDerivative):
         # Layers
         self.input = None
         self.hidden = None
         self.output = None
 
         # Weights
-        self.weights1 = np.random.rand(hidden_neurons, input_size)
-        self.weights2 = np.random.rand(output_size, hidden_neurons)
-        # self.weights2 = np.zeros(shape=(output_size, hidden_neurons))
+        self.weights1 = (np.random.rand(hidden_neurons, input_size) * 2 - 1) / np.sqrt(input_size)
+        self.weights2 = np.zeros(shape=(output_size, hidden_neurons))
+
+        # Learning rate
+        self.lr = learning_rate
 
         # Biases
         self.hidden_biases = np.zeros(shape=(hidden_neurons, 1))
@@ -30,20 +32,19 @@ class Perceptron:
 
         # Activation function
         self.activation = function
-        self.derivative = derivative
+        self.activation_derivative = derivative
 
     def feedforward(self):
         self.hidden = self.activation(np.dot(self.weights1, self.input) + self.hidden_biases)
-        self.output = self.activation(np.dot(self.weights2, self.hidden) + self.output_biases)
-        # self.output = np.dot(self.weights2, self.hidden))
+        self.output = np.dot(self.weights2, self.hidden) + self.output_biases
 
     def backprop(self, y):
-        d_weights2 = np.dot(2 * (y - self.output) * self.derivative(self.output), self.hidden.T)
-        d_weights1 = np.dot(np.dot(self.weights2.T, 2 * (y - self.output) * self.derivative(self.output))
-                            * self.derivative(self.hidden), self.input.T)
+        d_weights2 = np.dot(2 * (y - self.output), self.hidden.T)
+        d_weights1 = np.dot(np.dot(self.weights2.T, 2 * (y - self.output))
+                            * self.activation_derivative(self.hidden), self.input.T)
 
-        self.weights1 += d_weights1
-        self.weights2 += d_weights2
+        self.weights1 += self.lr * d_weights1
+        self.weights2 += self.lr * d_weights2
 
     def train(self, x, y):
         self.input = x
