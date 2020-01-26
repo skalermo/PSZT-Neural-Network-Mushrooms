@@ -48,6 +48,7 @@ na tym zbiorze sprawdzamy efektywność działania sieci.
 - Już na 13 iteracji strata na zbiorze testowym osiągnęła 0.002 (później się okazało to jest duża strata) i utrzymywała się taka w przeciągu pozostałych iteracji.
 
 **Zależność straty od liczby neuronów i podziału danych**
+
 Badamy jak zmienia się strata na zbiorze testowym w zależności od liczby neuronów i stosunku liczności zbioru
 treningowego do liczności zbioru testowego.
 
