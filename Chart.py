@@ -32,29 +32,9 @@ class Chart:
     def save(size=(640, 480), dpi=72):
         size = [x/dpi for x in size]
         fig.set_size_inches(size, forward=True)
-        fig.savefig('chart.png', dpi=dpi)
+        fig.savefig('chart.png', dpi=dpi)\
 
-# # draw a tick corresponding to the firstGoodGeneration above the chart
-# generationTick = [firstGoodGeneration]
-# ax.xaxis.set_minor_locator(ticker.FixedLocator(generationTick))
-# ax.xaxis.set_minor_formatter(ticker.FixedFormatter(generationTick))
-# ax.tick_params(axis="x", which="minor", direction="out",
-#                top=True, labeltop=True, bottom=False, labelbottom=False)
-#
-# # draw a tick corresponding to the the lowest achieved cost
-# costTick = [progress[-1]]
-# ax.yaxis.set_minor_locator(ticker.FixedLocator(costTick))
-# ax.yaxis.set_minor_formatter(ticker.FixedFormatter(costTick))
-# ax.tick_params(axis="y", which="minor", direction="out",
-#                right=True, labelright=True, left=False, labelleft=False)
-#
-# ax.set_ylabel('Distance')
-# ax.set_xlabel('Generation')
-#
-# # save chart
-# fig.set_size_inches(18, 10, forward=True)
-# fig.set_dpi(100)
-# fig.savefig('chart.png', dpi=100)
-#
-# plt.show()
-# plt.close()
+    @staticmethod
+    def setAxisLabels(y_label, x_label):
+        ax.set_ylabel(y_label)
+        ax.set_xlabel(x_label)

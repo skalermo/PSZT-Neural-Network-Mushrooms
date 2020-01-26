@@ -130,6 +130,7 @@ if __name__ == '__main__':
 
     # Show chart
     if args['c']:
+        Chart.setAxisLabels('Loss', 'K-Fold iteration')
         Chart.addToPlot(chart_loss, "Validation Loss")
         Chart.show()
 
