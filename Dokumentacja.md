@@ -45,7 +45,7 @@ na tym zbiorze sprawdzamy efektywność działania sieci.
 
 ![second_chart](charts/double_activation/simple_validation_2neurons.png)
 
-- Już na 13 iteracji strata na zbiorze testowym osiągnęła 0.002 (później się okazało to jest duża strata) i utrzymywała się taka w przeciągu pozostałych iteracji.
+- Już na 13 iteracji strata na zbiorze testowym osiągnęła 0.002 i utrzymywała się taka w przeciągu pozostałych iteracji.
 
 **Zależność straty od liczby neuronów i podziału danych**
 Badamy jak zmienia się strata na zbiorze testowym w zależności od liczby neuronów i stosunku liczności zbioru
@@ -147,8 +147,34 @@ Porównanie współczynników uczenia 0.07, 0.1 oraz 0.3
 |---|---|
 | ![4neurons2](charts/learning_rates/4neurons2.png) | ![8neurons](charts/learning_rates/8neurons.png) |
 
-- wskaźniki jakości pokazują porównywalny rezultat
+- współczynniki jakości pokazują porównywalny rezultat
 - postanowiliśmy w dalszych eksperymentach używać wartości 0.1
+
+**K-krotna walidacja krzyżowa**
+Dla ulepszenia jakości uczenia i oceniania sieci wprowadzamy metodę k-krotnej walidacji krzyżowej. 
+Rysunek poniżej ilustruje w jaki sposób dzielone są dane wejściowe.
+
+![cross_validation](charts/grid_search_cross_validation.png)
+
+Początkowy zbiór dzielony jest na:
+- zbiór walidacyjny, na którym sieć się nie uczy, sprawdzamy na nim poprawność sprawność sieci
+- zbiór przetwarzany przez sieć metodą k-krotnej walidacji
+
+Tabela poniżej pokazuje liczbę poprawnie przewidzianych odpowiedzi i odpowiednie parametry sieci
+
+| Liczba iteracji uczenia | Liczba neuronów | Współczynnik uczenia | Stosunek zbiorów treningowy:testowy:walidacyjny | Poprawne odpowiedzi | Strata |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|100|4|0.1|16:4:5|1624/1624|2.168e-07|
+|50|2|0.1|16:4:5|1624/1624|1.382e-06|
+|10|1|0.1|8:2:5|2708/2708|0.00012544|
+|10|1|0.1|2:1:3|4062/4062|0.00030634|
+|1|1|0.1|1:1:2|4055/4062|0.00486307|
+|1|1|0.001|1:1:2|3662/4062|0.09289285|
+
+Widać, że nawet bardzo słabo nauczona sieć na jednym neuronie potrafi poprawnie 
+przewidywać wszystkie próbki ze zbioru walidacyjnego, co mówi o tym, że zależność tego czy grzyb jest
+jadalny czy nie od jego parametrów jest bardzo prosta.
+
 
 ## Listę wykorzystanych narzędzi i bibliotek
 Język programowania
@@ -159,10 +185,5 @@ Wykorzystane biblioteki
 - [pandas](https://pandas.pydata.org/)
 - [seaborn](https://seaborn.pydata.org/)
 
-
-### Todo
-Instrukcję pozwalającą na odtworzenie uzyskanych wyników.
-Cele i tezy przeprowadzonych badań, np. celem tego eksperymentu jest zbadanie wpływu zmiany rozmiaru populacji na wynik optymalizacji. Zakładamy, że wraz ze zwiększeniem rozmiaru populacji rosła będzie jakość uzyskanych wyników.
-Wyniki eksperymentów w postaci czytelnych tabel i/lub wykresów.
-Omówienie wyników eksperymentów. (co widać)
-Wnioski
+Wykorzystane materiały
+- https://scikit-learn.org/stable/modules/cross_validation.html
