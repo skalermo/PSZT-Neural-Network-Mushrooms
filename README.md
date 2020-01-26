@@ -6,7 +6,7 @@ Możliwe ustawienia programu:
  - `-i` Liczba iteracji
  - `-l` Learning rate
  - `-r` Stosunek Danych Treningowych do Walidacyjnych 1:R
- - `-k` Stosunek K-krotna walidacja 1:K
+ - `-k` Stosunek K-krotnej walidacji 1:K
  - `-s` Ziarno losowości
  - `-c` Wyświetl wykres
  - `-v` Tryb ze wszystkimi szczegółami
