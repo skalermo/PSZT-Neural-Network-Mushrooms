@@ -9,9 +9,18 @@ Przewidywanie czy [grzyb](https://archive.ics.uci.edu/ml/datasets/mushroom) jest
 ## Interpretacja zadania
 Mamy pełną swobodę w zaimplementowaniu sieci neuronowej. Wykorzystując podany wcześniej zbiór danych, musimy przeanalizować które komponenty sieci i jakie podejście przy jej budowaniu zapewni jak największą efektywność.
 
-## Wypunktowanie wkładu poszczególnych autorów (kto co zrobił)
+## Wkład poszczególnych autorów
+
 Rafal Babinski
+- Przygotowanie zbioru danych do przetwarzania
+- Implementacja klasy perceptronu
+- Implementacja K-krotnej walidacji krzyżowej
+- Generowanie dokumentacji
+
 Roman Moskalenko
+- Implementacja klasy perceptronu
+- Generowanie wykresów
+- Prowadzenie eksperymentów
 
 ## Decyzje projektowe i przeprowadzone badania
 **Decyzje wstępne**
@@ -174,6 +183,59 @@ Tabela poniżej pokazuje liczbę poprawnie przewidzianych odpowiedzi i odpowiedn
 Widać, że nawet bardzo słabo nauczona sieć na jednym neuronie potrafi poprawnie 
 przewidywać wszystkie próbki ze zbioru walidacyjnego, co mówi o tym, że zależność tego czy grzyb jest
 jadalny czy nie od jego parametrów jest bardzo prosta.
+
+**Porównanie perceptronu z funcją aktywacji na neuronach warsty wyjściowej i bez niej**
+
+Konfiguracja:
+
+- 4 neurony
+- współczynnik uczenia 0.1
+- stosunek danych walidacyjnych do pozostałych 1:1
+- stosunek danych treningowych do testowych 2:1
+- liczba iteracji uczenia na każdym k-krotnym podziale 100
+- liczba iteracji uczenia po k-krotnej walidacji 100
+- ziarno losowości 1
+
+| |Z funkcją aktywacji|Bez funkcji aktywacji|
+|:---:|:---:|:---:|
+|**Strata uśredniona testowa**|4.84142896e-06|1.69846478e-06|
+|**Strata na zbiorze walidacyjnym**|5.49349119e-06|4.38600909e-07|
+|**Poprawne odpowiedzi**|**100.0%**|**100.0%**|
+|**Wykres zależności straty na zbiorze walidacyjnym od iteracji**|![activ](charts/activ_vs_noactiv/activ.png)|![noactiv](charts/activ_vs_noactiv/noactiv.png)|
+
+"Ekstremalne" warunki:
+- 1 neuron
+- współczynnik uczenia 0.001
+- stosunek danych walidacyjnych do pozostałych 1:1
+- stosunek danych treningowych do testowych 1:1
+- liczba iteracji uczenia na każdym k-krotnym podziale 100
+- liczba iteracji uczenia po k-krotnej walidacji 100
+- ziarno losowości 1
+
+| |Z funkcją aktywacji|Bez funkcji aktywacji|
+|:---:|:---:|:---:|
+|**Strata uśredniona testowa**|0.1414469073940681|0.010690605358111328|
+|**Strata na zbiorze walidacyjnym**|0.12473975|0.00486256|
+|**Poprawne odpowiedzi**|**53.18%**|**99.88%**|
+|**Wykres zależności straty na zbiorze walidacyjnym od iteracji**|![activ_extr](charts/activ_vs_noactiv/activ_extr.png)|![noactiv_extr](charts/activ_vs_noactiv/noactiv_extr.png)|
+
+Perceptron bez funcji aktywacji na neuronie wyjściowym na ogół wykazuje mniejszą stratę i pokazuje nieco lepsze wyniki
+niż w przypadku z funkcją aktywacji.
+
+**Podsumowanie badań**
+
+Pod koniec badań większość wariacji perceptronu pokazywała dobre wyniki i często miała 100% poprawnych odpowiedzi
+na zbiorze walidacyjnym. 
+
+Natomiast najmniejszą możliwą stratę wykazuję dana modyfikacja perceptronu:
+- 4-8 neuronów
+- Wpółczynnik uczenia 0.1
+- Sygmoidalna funkcja aktywacji na neuronach warstwy ukrytej
+- Liniowy neuron wyjściowy (bez funkcji aktywacji)
+- Losowe inicjowanie wag neuronów warsty ukrytej z rozkładu jednostajnego (-1/sqrt(n), 1/sqrt(n))
+- Inicjowanie wag neuronu wyjściowego zerami
+
+Przy współczynniku k równym 4 bądź 5 dla K-krotnej walidacji krzyżowej.
 
 
 ## Listę wykorzystanych narzędzi i bibliotek

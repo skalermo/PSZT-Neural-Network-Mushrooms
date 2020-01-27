@@ -73,6 +73,8 @@ if __name__ == '__main__':
         for iteration in range(args['i']):
             for i in range(len(train_output)):
                 p.train(train_input[i], train_output[i])
+            if args['c']:
+                chart_loss.append(calcLoss(in_validation, out_validation))
 
         # Calculate loss
         loss_sum = 0.0
@@ -82,8 +84,6 @@ if __name__ == '__main__':
         test_loss.append(loss_sum / len(train_output))
 
         # For charting purposes
-        if args['c']:
-            chart_loss.append(calcLoss(in_validation, out_validation))
 
         if args['v']:
             print("for k # " + str(k))
@@ -114,6 +114,7 @@ if __name__ == '__main__':
 
     validation_loss = validation_loss / len(out_validation)
 
+    print("Test Average Loss: " + str(test_loss))
     print("Validation Loss: " + str(validation_loss))
     print("Predicted: {}/{} = {}%".format(predicted, len(out_validation), (predicted*100)/len(out_validation)))
 
@@ -121,6 +122,7 @@ if __name__ == '__main__':
     if args['c']:
         Chart.setAxisLabels('Loss', 'K-Fold iteration')
         Chart.addToPlot(chart_loss, "Validation Loss")
+        Chart.save()
         Chart.show()
 
 

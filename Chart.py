@@ -20,7 +20,7 @@ class Chart:
 
     @staticmethod
     def addToPlot(data, label=''):
-        ax.plot(data, label=label, picker=0.01)
+        ax.plot(data, label=label)
         ax.legend()
         plt.yscale("log")
 
@@ -32,7 +32,7 @@ class Chart:
     def save(size=(640, 480), dpi=72):
         size = [x/dpi for x in size]
         fig.set_size_inches(size, forward=True)
-        fig.savefig('chart.png', dpi=dpi)\
+        fig.savefig('chart.png', dpi=dpi)
 
     @staticmethod
     def setAxisLabels(y_label, x_label):
