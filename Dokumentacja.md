@@ -25,26 +25,26 @@ Roman Moskalenko
 ## Decyzje projektowe i przeprowadzone badania
 **Decyzje wstępne**
 
-- Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstowy
+- Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstwowy
 - Jako szablon wstępny wybraliśmy sieć neuronową opisaną w [tym artykule](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6).
 - Uczenie sieci będzie przeprowadzać się z nadzorem.
 - Przekodowaliśmy podany zbiór danych na *kod 1 z n* dla zapewnienia działania sieci.
 - Arbitralnie wybraliśmy liczbę neuronów w warstwie ukrytej - 2.
 - Arbitralnie wybraliśmy funkcję aktywacji - sigmoid.
-- Inicjalizacja wag każdego nejronu odbywa się losowo.
+- Inicjalizacja wag każdego neuronu odbywa się losowo.
 - Wartości parametrów bias jest zerowa.
 - Stworzyliśmy zbiór danych kontrolnych, 100 wybranych losowo próbek z podanego
  zbioru. Na nim będziemy testować efektywność sieci.
  
 **Badanie wstępne**
 
-- Uruchomiono po raz pierszy sieć neuronową. 
+- Uruchomiono po raz pierwszy sieć neuronową. 
 - Przez 100 iteracji sieć uczyła się na całym zbiorze danych.
 - Przetestowano na losowo wybranych 100 próbkach.
 
 ![first_chart](charts/double_activation/first_chart.png)
 
-- Przez pierwsze 30 iteracji możemy zaobserwować dużą strate na zbiorze walidacyjnym (czerwona linia).
+- Przez pierwsze 30 iteracji możemy zaobserwować dużą stratę na zbiorze walidacyjnym (czerwona linia).
 - Po czym następuje prawie zerowa strata. Mamy podejrzenie, że sieć dopasowała się do danych (przeuczenie sieci).
 
 **Podział zbioru danych na treningowy i testowy**
@@ -77,7 +77,7 @@ Straty po 100 iteracjach uczenia
 -->
 Wnioski z tabeli:
 - perceptron z 1 neuronem przy żadnym z podziałów nie pokazał dobrych wyników.
-- perceptron z 2 oraz 4 neuronami spradził się nieco lepiej niż perceptrony z 8 i 16.
+- perceptron z 2 oraz 4 neuronami sprawdził się nieco lepiej niż perceptrony z 8 i 16.
 - perceptron może nauczyć się nawet gdy dane treningowe stanowią połowę lub mniej od całego zbioru
 lecz wtedy strata jest porównywalnie duża.
 - możliwe, że 100 iteracji to jednak zbyt mało by nauczyć perceptron.
@@ -104,7 +104,7 @@ Jednak ciężko przewidzieć w którym momencie nastąpi zmniejszenie straty i c
 Ponieważ nasz perceptron jest implementacją bazowaną na przykładzie z artykułu powyżej, może zawierać wady, z powodu
 możliwych uproszczeń przyjętych w artykule.
 
-Z tego powodu następujące zmiany powinne zbliżyć naszą implementacje do modelu przedstawionego na wykładzie:
+Z tego powodu następujące zmiany powinny zbliżyć naszą implementacje do modelu przedstawionego na wykładzie:
 - neuron warstwy wyjściowej jest liniowy (nie obliczamy funkcji aktywacji dla niego). 
 - odpowiednie zmiany propagacji wstecznej
 
@@ -121,7 +121,7 @@ po wagach staje się zbyt duża, co skutkuje tym, że wartości bezwzględne wag
 i powodują powstanie nadmiaru przy obliczaniu funkcji aktywacji.
 
 Chcemy mieć kontrolę nad tym jak szybko zmieniają się wagi. Wprowadzamy tzw współczynnik uczenia.
-Teraz pochodne straty zanim dodać do wag przemnażamy przez ten parametr. Dla początku przyjeliśmy
+Teraz pochodne straty zanim dodać do wag przemnażamy przez ten parametr. Dla początku przyjęliśmy
 współczynnik uczenia równy 0.1.
 
 ![noactiv100iter_lr01randw](charts/no_output_activation/noactiv100iter_lr01_randw.png)
@@ -131,7 +131,7 @@ współczynnik uczenia równy 0.1.
 ![noactiv100iter_lr01randw3](charts/no_output_activation/noactiv100iter_lr01_randw3.png)
 
 
-- obserujemy wyraźne poprawienie sprawności
+- obserwujemy    wyraźne poprawienie sprawności
 - zauważalny jest wpływ losowości początkowych wag
 
 **Inicjowanie wag**
@@ -146,7 +146,7 @@ gdzie n - wymiar wymiar wejścia neuronu
 
 ![noactiv400iter_lr01_custw2](charts/no_output_activation/noactiv400iter_lr01_custw2.png)
 
-- bardzo dobry rezultat. Perceptron odrazu zaczyna poprawiać stratę dla wszystkich badanych wariacji
+- bardzo dobry rezultat. Perceptron natychmiast zaczyna poprawiać stratę dla wszystkich badanych wariacji
 - perceptron z 1 i 2 neuronami uczy się wolno w porównaniu z innymi
 - perceptron z 16 neuronami już nie poprawia wyniku w porównaniu z 4 czy 8 neuronami
 
@@ -198,7 +198,7 @@ Widać, że nawet bardzo słabo nauczona sieć na jednym neuronie potrafi popraw
 przewidywać wszystkie próbki ze zbioru walidacyjnego, co mówi o tym, że zależność tego czy grzyb jest
 jadalny czy nie od jego parametrów jest bardzo prosta.
 
-**Porównanie perceptronu z funcją aktywacji na neuronach warsty wyjściowej i bez niej**
+**Porównanie perceptronu z funkcją aktywacji na neuronach warstwy wyjściowej i bez niej**
 
 Konfiguracja:
 
@@ -247,7 +247,7 @@ Wykres dla perceptronu bez funkcji aktywacji na wyjściowym neuronie
 
 ![noactiv_extr](charts/activ_vs_noactiv/noactiv_extr.png)
 
-Perceptron bez funcji aktywacji na neuronie wyjściowym na ogół wykazuje mniejszą stratę i pokazuje nieco lepsze wyniki
+Perceptron bez funkcji aktywacji na neuronie wyjściowym na ogół wykazuje mniejszą stratę i pokazuje nieco lepsze wyniki
 niż w przypadku z funkcją aktywacji.
 
 **Podsumowanie badań**
@@ -257,10 +257,10 @@ na zbiorze walidacyjnym.
 
 Natomiast najmniejszą możliwą stratę wykazuję dana modyfikacja perceptronu:
 - 4-8 neuronów
-- Wpółczynnik uczenia 0.1
+- Współczynnik uczenia 0.1
 - Sygmoidalna funkcja aktywacji na neuronach warstwy ukrytej
 - Liniowy neuron wyjściowy (bez funkcji aktywacji)
-- Losowe inicjowanie wag neuronów warsty ukrytej z rozkładu jednostajnego (-1/sqrt(n), 1/sqrt(n))
+- Losowe inicjowanie wag neuronów warstwy ukrytej z rozkładu jednostajnego (-1/sqrt(n), 1/sqrt(n))
 - Inicjowanie wag neuronu wyjściowego zerami
 
 Przy współczynniku k równym 4 bądź 5 dla K-krotnej walidacji krzyżowej.
