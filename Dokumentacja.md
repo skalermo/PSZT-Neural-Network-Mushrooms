@@ -88,13 +88,10 @@ Jeszcze dwa razy uruchomiliśmy sieć dla 100 i 400 iteracji dla podziału danyc
 
 Wykresy teraz mają skalę logarytmiczną.
 
-![doubleactiv_100iter](charts/double_activation/doubleactiv_100iter.png)
-
-![doubleactiv_100iter2](charts/double_activation/doubleactiv_100iter2.png)
-
-![doubleactiv_400iter](charts/double_activation/doubleactiv_400iter.png)
-
-![doubleactiv_400iter2](charts/double_activation/doubleactiv_400iter2.png)
+|||
+|---|---|
+|![doubleactiv_100iter](charts/double_activation/doubleactiv_100iter.png)|![doubleactiv_100iter2](charts/double_activation/doubleactiv_100iter2.png)|
+|![doubleactiv_400iter](charts/double_activation/doubleactiv_400iter.png)|![doubleactiv_400iter2](charts/double_activation/doubleactiv_400iter2.png)|
 
 Widać, że liczba iteracji ma duże znaczenie. Większość wariacji perceptronu zmniejsza stratę dopiero po 100 iteracjach.
 Jednak ciężko przewidzieć w którym momencie nastąpi zmniejszenie straty i czy w ogóle nastąpi.
@@ -124,11 +121,10 @@ Chcemy mieć kontrolę nad tym jak szybko zmieniają się wagi. Wprowadzamy tzw 
 Teraz pochodne straty zanim dodać do wag przemnażamy przez ten parametr. Dla początku przyjęliśmy
 współczynnik uczenia równy 0.1.
 
-![noactiv100iter_lr01randw](charts/no_output_activation/noactiv100iter_lr01_randw.png)
-
-![noactiv100iter_lr01randw2](charts/no_output_activation/noactiv100iter_lr01_randw2.png)
-
-![noactiv100iter_lr01randw3](charts/no_output_activation/noactiv100iter_lr01_randw3.png)
+|||
+|---|---|
+|![noactiv100iter_lr01randw](charts/no_output_activation/noactiv100iter_lr01_randw.png)|![noactiv100iter_lr01randw2](charts/no_output_activation/noactiv100iter_lr01_randw2.png)|
+|![noactiv100iter_lr01randw3](charts/no_output_activation/noactiv100iter_lr01_randw3.png)||
 
 
 - obserwujemy    wyraźne poprawienie sprawności
@@ -142,11 +138,13 @@ Wolimy zmniejszyć do minimum negatywny wpływ losowości wag.
 gdzie n - wymiar wymiar wejścia neuronu
 
 
-![noactiv400iter_lr01_custw](charts/no_output_activation/noactiv400iter_lr01_custw.png)
+|||
+|---|---|
+|![noactiv400iter_lr01_custw](charts/no_output_activation/noactiv400iter_lr01_custw.png)|![noactiv400iter_lr01_custw2](charts/no_output_activation/noactiv400iter_lr01_custw2.png)|
 
-![noactiv400iter_lr01_custw2](charts/no_output_activation/noactiv400iter_lr01_custw2.png)
 
-- bardzo dobry rezultat. Perceptron natychmiast zaczyna poprawiać stratę dla wszystkich badanych wariacji
+- obserwujemy bardzo dobry rezultat
+- perceptron natychmiast zaczyna poprawiać stratę dla wszystkich badanych wariacji
 - perceptron z 1 i 2 neuronami uczy się wolno w porównaniu z innymi
 - perceptron z 16 neuronami już nie poprawia wyniku w porównaniu z 4 czy 8 neuronami
 
@@ -161,13 +159,10 @@ Porównamy jak zachowuje się strata dla perceptronu z 4 neuronami dla różnych
 
 Porównanie współczynników uczenia 0.07, 0.1 oraz 0.3
 
-Dla 4 neuronów
 
-![4neurons2](charts/learning_rates/4neurons2.png)
-
-Dla 8 neuronów
-
-![8neurons](charts/learning_rates/8neurons.png)
+| 4 neurony | 8 neuronów |
+|---|---|
+| ![4neurons2](charts/learning_rates/4neurons2.png) | ![8neurons](charts/learning_rates/8neurons.png) |
 
 - współczynniki jakości pokazują porównywalny rezultat
 - postanowiliśmy w dalszych eksperymentach używać wartości 0.1
@@ -215,14 +210,8 @@ Konfiguracja:
 |**Strata uśredniona testowa**|4.84142896e-06|1.69846478e-06|
 |**Strata na zbiorze walidacyjnym**|5.49349119e-06|4.38600909e-07|
 |**Poprawne odpowiedzi**|**100.0%**|**100.0%**|
+|**Wykres zależności straty na zbiorze walidacyjnym od iteracji**|![activ](charts/activ_vs_noactiv/activ.png)|![noactiv](charts/activ_vs_noactiv/noactiv.png)|
 
-Wykres dla perceptronu z funkcją aktywacji na wyjściowym neuronie
-
-![activ](charts/activ_vs_noactiv/activ.png)
-
-Wykres dla perceptronu bez funkcji aktywacji na wyjściowym neuronie
-
-![noactiv](charts/activ_vs_noactiv/noactiv.png)
 
 "Ekstremalne" warunki:
 - 1 neuron
@@ -238,14 +227,7 @@ Wykres dla perceptronu bez funkcji aktywacji na wyjściowym neuronie
 |**Strata uśredniona testowa**|0.1414469073940681|0.010690605358111328|
 |**Strata na zbiorze walidacyjnym**|0.12473975|0.00486256|
 |**Poprawne odpowiedzi**|**53.18%**|**99.88%**|
-
-Wykres dla perceptronu z funkcją aktywacji na wyjściowym neuronie
-
-![activ_extr](charts/activ_vs_noactiv/activ_extr.png)
-
-Wykres dla perceptronu bez funkcji aktywacji na wyjściowym neuronie
-
-![noactiv_extr](charts/activ_vs_noactiv/noactiv_extr.png)
+|**Wykres zależności straty na zbiorze walidacyjnym od iteracji**|![activ_extr](charts/activ_vs_noactiv/activ_extr.png)|![noactiv_extr](charts/activ_vs_noactiv/noactiv_extr.png)|
 
 Perceptron bez funkcji aktywacji na neuronie wyjściowym na ogół wykazuje mniejszą stratę i pokazuje nieco lepsze wyniki
 niż w przypadku z funkcją aktywacji.
