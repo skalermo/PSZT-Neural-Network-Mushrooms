@@ -60,8 +60,8 @@ Roman Moskalenko
 \subsection{Decyzje wstępne}
 
 \begin{itemize}
-	\item 	Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstwowy
-  \item 	Jako szablon wstępny wybraliśmy sieć neuronową opisaną w tym artykule.
+	\item 	Wybraliśmy do zaimplementowania prosty lecz efektywny typ sieci neuronowej: perceptron dwuwarstwowy.
+  \item 	Jako szablon wstępny wybraliśmy sieć neuronową opisaną w \href{https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6}{tym artykule}.
   \item 	Uczenie sieci będzie przeprowadzać się z nadzorem.
   \item 	Przekodowaliśmy podany zbiór danych na kod 1 z n dla zapewnienia działania sieci.
   \item	Arbitralnie wybraliśmy liczbę neuronów w warstwie ukrytej - 2.
@@ -190,14 +190,10 @@ Z tego powodu następujące zmiany powinny zbliżyć naszą implementacje do mod
   \item   Odpowiednie zmiany propagacji wstecznej.
 \end{itemize}
 
-\begin{itemize}
-  \item   Straty po 100 iteracjach uczenia
-\end{itemize}
-
 \begin{figure}[h]
   \centering
   \includegraphics[width=1.0\textwidth]{charts/no_output_activation/noactiv100iter_lr1.png}
-  \caption{}
+  \caption{Straty po 100 iteracjach uczenia}
   \label{}
 \end{figure}
 
@@ -234,8 +230,8 @@ Chcemy mieć kontrolę nad tym jak szybko zmieniają się wagi. Wprowadzamy tzw 
 \end{figure}
 
 \begin{itemize}
-  \item   obserwujemy wyraźne poprawienie sprawności
-  \item   zauważalny jest wpływ losowości początkowych wag
+  \item   Obserwujemy wyraźne poprawienie sprawności.
+  \item   Zauważalny jest wpływ losowości początkowych wag.
 \end{itemize}
 
 \pagebreak
@@ -310,8 +306,8 @@ Porównamy teraz straty dla wspóczynników uczenia 0.07, 0.1 oraz 0.3 dla perce
 \end{figure}
 
 \begin{itemize}
-  \item   współczynniki jakości pokazują porównywalny rezultat
-  \item   postanowiliśmy w dalszych eksperymentach używać wartości 0.1
+  \item   Współczynniki jakości pokazują porównywalny rezultat.
+  \item   Postanowiliśmy w dalszych eksperymentach używać wartości 0.1.
 \end{itemize}
 
 \subsection{K-krotna walidacja krzyżowa}
@@ -328,7 +324,7 @@ Dla ulepszenia jakości uczenia i oceniania sieci wprowadzamy metodę k-krotnej 
 Początkowy zbiór dzielony jest na:
 
 \begin{itemize}
-  \item   Zbiór walidacyjny, na którym sieć się nie uczy, sprawdzamy na nim poprawność sprawność sieci.
+  \item   Zbiór walidacyjny, na którym sieć się nie uczy, sprawdzamy na nim poprawność sieci.
   \item   Zbiór przetwarzany przez sieć metodą k-krotnej walidacji.
 \end{itemize}
 
@@ -401,7 +397,7 @@ Konfiguracja:
   \caption{Bez funkcji aktywacji}
   \label{}
 \end{subfigure}
-\caption{Wykres zależności straty na zbiorze walidacyjnym od iteracji}
+\caption{Zależność straty na zbiorze walidacyjnym od liczby iteracji}
 \label{}
 \end{figure}
 
@@ -425,7 +421,7 @@ Przeprowadzimy jeszcze raz takie same testy przy gorszych warunkach:
   \hline
   & \textbf{Z funkcją aktywacji} & \textbf{Bez funkcji aktywacji} \\ [0.5ex] 
   \hline
-  \textbf{\thead{Strata \\uśredniona testowa}} & 0.1414469073940681 & 0.010690605358111328 \\
+  \textbf{\thead{Strata \\uśredniona testowa}} & 0.14144691 & 0.01069061 \\
   \hline
   \textbf{\thead{Strata \\na zbiorze walidacyjnym}} & 0.12473975 & 0.00486256 \\
   \hline
@@ -446,7 +442,7 @@ Przeprowadzimy jeszcze raz takie same testy przy gorszych warunkach:
   \caption{Bez funkcji aktywacji}
   \label{}
 \end{subfigure}
-\caption{Wykres zależności straty na zbiorze walidacyjnym od iteracji}
+\caption{Zależność straty na zbiorze walidacyjnym od liczby iteracji}
 \label{}
 \end{figure}
 
@@ -473,9 +469,8 @@ Natomiast najmniejszą możliwą stratę wykazuję dana modyfikacja perceptronu:
 Język programowania
 
 \begin{itemize}
-	\item   Python 3
+	\item   \href{https://www.python.org/}{Python 3}
 \end{itemize}
-
 Wykorzystane biblioteki
 
 \begin{itemize}
@@ -483,7 +478,6 @@ Wykorzystane biblioteki
 	\item   \href{https://pandas.pydata.org/}{pandas}
 	\item   \href{https://seaborn.pydata.org/}{seaborn}
 \end{itemize}
-
 Wykorzystane materiały
 
 \begin{itemize}
